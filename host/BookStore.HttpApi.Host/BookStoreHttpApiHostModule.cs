@@ -78,6 +78,45 @@ namespace BookStore
                 });
             }
 
+            //context.Services.AddSwaggerGen(
+            //    options =>
+            //    {
+            //        options.SwaggerDoc("v1", new OpenApiInfo { Title = "BookStore API", Version = "v1" });
+            //        options.DocInclusionPredicate((docName, description) => true);
+            //        options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            //        {
+            //            Description = "JWT授权(数据将在请求头中进行传输) 直接在下框中输入Bearer {token}（注意两者之间是一个空格）\"",
+            //            Name = "Authorization",//jwt默认的参数名称
+            //            In = ParameterLocation.Header,//jwt默认存放Authorization信息的位置(请求头中)
+            //            Type = SecuritySchemeType.ApiKey
+            //        });
+            //        options.AddSecurityRequirement(new OpenApiSecurityRequirement
+            //        {
+            //            { new OpenApiSecurityScheme
+            //                {
+            //                    Reference = new OpenApiReference()
+            //                    {
+            //                        Id = "Bearer",
+            //                        Type = ReferenceType.SecurityScheme
+            //                    }
+            //                }, Array.Empty<string>()
+            //            }
+            //        });
+            //        var xmlapipath = Path.Combine(AppContext.BaseDirectory, "BookStore.HttpApi.xml");
+            //        if (File.Exists(xmlapipath))
+            //        {
+            //            options.IncludeXmlComments(xmlapipath, true);
+            //        }
+            //        var xmlapppath = Path.Combine(AppContext.BaseDirectory, "BookStore.Application.Contracts.xml");
+            //        if (File.Exists(xmlapipath))
+            //        {
+            //            options.IncludeXmlComments(xmlapppath, true);
+            //        }
+
+            //        options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "BookStore.Application.xml"),true);
+            //    });
+
+
             context.Services.AddAbpSwaggerGenWithOAuth(
                 configuration["AuthServer:Authority"],
                 new Dictionary<string, string>
@@ -86,27 +125,19 @@ namespace BookStore
                 },
                 options =>
                 {
-                    options.SwaggerDoc("v1", new OpenApiInfo {Title = "BookStore API", Version = "v1"});
+                    options.SwaggerDoc("v1", new OpenApiInfo { Title = "BookStore API", Version = "v1" });
                     options.DocInclusionPredicate((docName, description) => true);
                     options.CustomSchemaIds(type => type.FullName);
+                    //var basePath = AppContext.BaseDirectory;
+
+                    //var xmlPath = Path.Combine(basePath, "BookStore.Application.xml");
+                    //options.IncludeXmlComments(xmlPath, true);
                 });
 
             Configure<AbpLocalizationOptions>(options =>
             {
-                options.Languages.Add(new LanguageInfo("cs", "cs", "Čeština"));
                 options.Languages.Add(new LanguageInfo("en", "en", "English"));
-                options.Languages.Add(new LanguageInfo("en-GB", "en-GB", "English (UK)"));
-                options.Languages.Add(new LanguageInfo("fi", "fi", "Finnish"));
-                options.Languages.Add(new LanguageInfo("fr", "fr", "Français"));
-                options.Languages.Add(new LanguageInfo("hi", "hi", "Hindi", "in"));
-                options.Languages.Add(new LanguageInfo("it", "it", "Italian", "it"));
-                options.Languages.Add(new LanguageInfo("hu", "hu", "Magyar"));
-                options.Languages.Add(new LanguageInfo("pt-BR", "pt-BR", "Português"));
-                options.Languages.Add(new LanguageInfo("ru", "ru", "Русский"));
-                options.Languages.Add(new LanguageInfo("sk", "sk", "Slovak"));
-                options.Languages.Add(new LanguageInfo("tr", "tr", "Türkçe"));
                 options.Languages.Add(new LanguageInfo("zh-Hans", "zh-Hans", "简体中文"));
-                options.Languages.Add(new LanguageInfo("zh-Hant", "zh-Hant", "繁體中文"));
             });
 
             context.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -122,13 +153,13 @@ namespace BookStore
                 options.KeyPrefix = "BookStore:";
             });
 
-            if (!hostingEnvironment.IsDevelopment())
-            {
-                var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]);
-                context.Services
-                    .AddDataProtection()
-                    .PersistKeysToStackExchangeRedis(redis, "BookStore-Protection-Keys");
-            }
+            //if (!hostingEnvironment.IsDevelopment())
+            //{
+            //    var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]);
+            //    context.Services
+            //        .AddDataProtection()
+            //        .PersistKeysToStackExchangeRedis(redis, "BookStore-Protection-Keys");
+            //}
 
             context.Services.AddCors(options =>
             {
@@ -182,10 +213,10 @@ namespace BookStore
             {
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "Support APP API");
 
-                var configuration = context.GetConfiguration();
-                options.OAuthClientId(configuration["AuthServer:SwaggerClientId"]);
-                options.OAuthClientSecret(configuration["AuthServer:SwaggerClientSecret"]);
-                options.OAuthScopes("BookStore");
+                //var configuration = context.GetConfiguration();
+                //options.OAuthClientId(configuration["AuthServer:SwaggerClientId"]);
+                //options.OAuthClientSecret(configuration["AuthServer:SwaggerClientSecret"]);
+                //options.OAuthScopes("BookStore");
             });
             app.UseAuditing();
             app.UseAbpSerilogEnrichers();

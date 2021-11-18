@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using BookStore.Entity;
+using Microsoft.Extensions.DependencyInjection;
 using Volo.Abp.EntityFrameworkCore;
 using Volo.Abp.Modularity;
 
@@ -17,6 +18,8 @@ namespace BookStore.EntityFrameworkCore
                 /* Add custom repositories here. Example:
                  * options.AddRepository<Question, EfCoreQuestionRepository>();
                  */
+                //options.AddRepository<Category, EfCoreQuestionRepository>();
+                options.AddDefaultRepositories<IBookStoreDbContext>(true);
             });
         }
     }

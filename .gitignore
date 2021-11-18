@@ -257,3 +257,6 @@ host/BookStore.HttpApi.Host/Logs/logs.txt
 host/BookStore.Web.Host/Logs/logs.txt
 host/BookStore.Web.Unified/Logs/logs.txt
 host/BookStore.Blazor.Server.Host/Logs/logs.txt
+/src/BookStore.HttpApi/BookStore.HttpApi.xml
+/src/BookStore.Application/BookStore.Application.xml
+/src/BookStore.Application.Contracts/BookStore.Application.Contracts.xml

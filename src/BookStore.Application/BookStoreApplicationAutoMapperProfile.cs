@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using BookStore.Dtos;
+using BookStore.Categorys;
 using BookStore.Entity;
 
 namespace BookStore

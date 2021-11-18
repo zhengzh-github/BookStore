@@ -7,6 +7,10 @@
     <RootNamespace>BookStore</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile></DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Volo.Abp.AspNetCore.Mvc" Version="4.4.4" />
     <ProjectReference Include="..\BookStore.Application.Contracts\BookStore.Application.Contracts.csproj" />

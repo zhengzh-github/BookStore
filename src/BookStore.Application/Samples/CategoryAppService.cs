@@ -1,4 +1,4 @@
-﻿using BookStore.Dtos;
+﻿using BookStore.Categorys;
 using BookStore.Entity;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using Volo.Abp.Domain.Repositories;
 
 namespace BookStore.Samples
 {
-    public class CategoryAppService: ApplicationService
+    public class CategoryAppService: ApplicationService, ICategoryAppService
     {
 
         private readonly IRepository<Category, int> _categoryRepository;

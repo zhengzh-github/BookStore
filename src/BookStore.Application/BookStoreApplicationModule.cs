@@ -20,6 +20,12 @@ namespace BookStore
             {
                 options.AddMaps<BookStoreApplicationModule>(validate: true);
             });
+            //Configure<AbpAspNetCoreMvcOptions>(options =>
+            //{
+            //    options
+            //        .ConventionalControllers
+            //        .Create(typeof(BookStoreApplicationModule).Assembly);
+            //});
         }
     }
 }
