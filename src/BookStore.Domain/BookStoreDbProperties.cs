@@ -6,6 +6,6 @@
 
         public static string DbSchema { get; set; } = null;
 
-        public const string ConnectionStringName = "BookStore";
+        public const string ConnectionStringName = "Default";
     }
 }

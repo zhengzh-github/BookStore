@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BookStore.Entity;
+using Microsoft.EntityFrameworkCore;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
 
@@ -11,11 +12,16 @@ namespace BookStore.EntityFrameworkCore
          * public DbSet<Question> Questions { get; set; }
          */
 
+        public DbSet<Category> Categories { get; set; }
+
+
         public BookStoreDbContext(DbContextOptions<BookStoreDbContext> options) 
             : base(options)
         {
 
         }
+
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

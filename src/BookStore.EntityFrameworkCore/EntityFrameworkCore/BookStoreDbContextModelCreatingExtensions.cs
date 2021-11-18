@@ -1,4 +1,5 @@
 ﻿using System;
+using BookStore.Entity;
 using Microsoft.EntityFrameworkCore;
 using Volo.Abp;
 
@@ -20,7 +21,7 @@ namespace BookStore.EntityFrameworkCore
             optionsAction?.Invoke(options);
 
             /* Configure all entities here. Example:
-
+          
             builder.Entity<Question>(b =>
             {
                 //Configure table & schema name
@@ -38,6 +39,7 @@ namespace BookStore.EntityFrameworkCore
                 b.HasIndex(q => q.CreationTime);
             });
             */
+          
         }
     }
 }

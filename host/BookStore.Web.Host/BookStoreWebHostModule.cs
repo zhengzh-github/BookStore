@@ -15,8 +15,6 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using BookStore.Localization;
 using BookStore.MultiTenancy;
-using BookStore.Web;
-using StackExchange.Redis;
 using Volo.Abp;
 using Volo.Abp.AspNetCore.Authentication.OAuth;
 using Volo.Abp.AspNetCore.Authentication.OpenIdConnect;
@@ -52,7 +50,6 @@ using Volo.Abp.VirtualFileSystem;
 namespace BookStore
 {
     [DependsOn(
-        typeof(BookStoreWebModule),
         typeof(BookStoreHttpApiClientModule),
         typeof(AbpAspNetCoreAuthenticationOpenIdConnectModule),
         typeof(AbpAspNetCoreMvcClientModule),
@@ -179,7 +176,7 @@ namespace BookStore
                 {
                     options.FileSets.ReplaceEmbeddedByPhysical<BookStoreDomainSharedModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}..{0}src{0}BookStore.Domain", Path.DirectorySeparatorChar)));
                     options.FileSets.ReplaceEmbeddedByPhysical<BookStoreApplicationContractsModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}..{0}src{0}BookStore.Application.Contracts", Path.DirectorySeparatorChar)));
-                    options.FileSets.ReplaceEmbeddedByPhysical<BookStoreWebModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}..{0}src{0}BookStore.Web", Path.DirectorySeparatorChar)));
+                    //options.FileSets.ReplaceEmbeddedByPhysical<BookStoreWebModule>(Path.Combine(hostingEnvironment.ContentRootPath, string.Format("..{0}..{0}src{0}BookStore.Web", Path.DirectorySeparatorChar)));
                 });
             }
         }
@@ -201,13 +198,13 @@ namespace BookStore
             IConfiguration configuration,
             IWebHostEnvironment hostingEnvironment)
         {
-            if (!hostingEnvironment.IsDevelopment())
-            {
-                var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]);
-                context.Services
-                    .AddDataProtection()
-                    .PersistKeysToStackExchangeRedis(redis, "BookStore-Protection-Keys");
-            }
+            //if (!hostingEnvironment.IsDevelopment())
+            //{
+            //    var redis = ConnectionMultiplexer.Connect(configuration["Redis:Configuration"]);
+            //    context.Services
+            //        .AddDataProtection()
+            //        .PersistKeysToStackExchangeRedis(redis, "BookStore-Protection-Keys");
+            //}
         }
 
         public override void OnApplicationInitialization(ApplicationInitializationContext context)
